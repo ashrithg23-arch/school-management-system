@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Time Table - CSO I B.Tech-I Sem</title>
+<style>
+  :root {
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --text: #1d2433;
+    --muted: #5d6679;
+    --line: #d5dbe8;
+    --head: #2f4fb8;
+    --head-text: #ffffff;
+    --lunch: #e3e6ee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151d;
+      --card: #1b202c;
+      --text: #e8ebf3;
+      --muted: #9aa3b8;
+      --line: #2e3547;
+      --head: #3b5bd6;
+      --head-text: #ffffff;
+      --lunch: #262c3b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 16px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 1.3rem; margin: 0 0 4px; }
+  h2 { font-size: 1.05rem; margin: 28px 0 10px; }
+  .info { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; }
+  .info span { display: inline-block; margin-right: 16px; }
+  .scroll { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; }
+  th, td { border: 1px solid var(--line); padding: 8px 6px; text-align: center; font-size: 0.9rem; }
+  thead th { background: var(--head); color: var(--head-text); font-weight: 600; }
+  thead th small { display: block; font-weight: 400; opacity: 0.85; }
+  tbody th { background: var(--lunch); text-align: center; }
+  td.lunch { background: var(--lunch); color: var(--muted); font-weight: 600; width: 50px; }
+  td.lab { font-weight: 600; background: rgba(47, 79, 184, 0.12); }
+  td.free { color: var(--muted); }
+  td.today, th.today { outline: 2px solid #e0a100; outline-offset: -2px; }
+  .subjects td, .subjects th { text-align: left; }
+  .subjects td:nth-child(n+4), .subjects th:nth-child(n+4) { text-align: center; }
+  tfoot td { font-weight: 600; background: var(--lunch); }
+  .note { color: var(--muted); font-size: 0.8rem; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>CSO | I B.Tech-I Semester Time Table (2026-27)</h1>
+  <div class="info">
+    <span>ACE Engineering College</span>
+    <span>Department of Computer Science and Engineering (IOT)</span><br>
+    <span>Room No: 1207</span>
+    <span>HOD: Dr. M. V. Vijaya Saradhi</span>
+    <span>Class In-charge: Mrs. P. Swaroopa</span>
+  </div>
+
+  <div class="scroll">
+    <table id="tt">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>1<small>9.30-10.30</small></th>
+          <th>2<small>10.30-11.30</small></th>
+          <th>3<small>11.30-12.20</small></th>
+          <th>Lunch<small>12.20-1.20</small></th>
+          <th>4<small>1.20-2.30</small></th>
+          <th>5<small>2.30-3.30</small></th>
+          <th>6<small>3.30-4.30</small></th>
+        </tr>
+      </thead>
+      <tbody id="ttBody"></tbody>
+    </table>
+  </div>
+  <p class="note">Today's row is highlighted.</p>
+
+  <h2>Subjects and Faculty</h2>
+  <div class="scroll">
+    <table class="subjects">
+      <thead>
+        <tr>
+          <th>S.No</th><th>Code</th><th>Sub</th><th>Subject</th><th>Faculty</th><th>Credits</th><th>Periods/Week</th>
+        </tr>
+      </thead>
+      <tbody id="subBody"></tbody>
+      <tfoot>
+        <tr><td colspan="5">Total</td><td style="text-align:center">20</td><td style="text-align:center">36</td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <h2>Academic Calendar (Autonomous) 2026-2027</h2>
+  <div class="scroll">
+    <table class="subjects">
+      <thead>
+        <tr><th>S.No</th><th>Description</th><th>From</th><th>To</th><th>Duration</th></tr>
+      </thead>
+      <tbody id="calBody"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+  // Timetable data: 6 periods per day (1,2,3 | lunch | 4,5,6)
+  var timetable = [
+    { day: "MON", p: ["EC", "EDC", "M&C", "PPS", "PPS", "ESE"] },
+    { day: "TUE", p: ["M&C", "EDC", "PPS", "EC", "EWS", "EWS"] },
+    { day: "WED", p: ["PPS", "PPS", "ESE", "M&C", "EC LAB", "EC LAB"] },
+    { day: "THU", p: ["EDC", "APT", "APT", "PPS LAB", "PPS LAB", "PPS LAB"] },
+    { day: "FRI", p: ["EDC", "ELCS LAB", "ELCS LAB", "EC", "PPS", "M&C"] },
+    { day: "SAT", p: ["ESE", "LIB", "YS", "M&C", "Project", "Project"] }
+  ];
+
+  var subjects = [
+    ["MA101BS", "M&C", "Matrices and Calculus", "Dr. G. Swapna", "4", "5"],
+    ["CH102BS", "EC", "Engineering Chemistry", "Mr. M. B. Mallesham", "3", "3"],
+    ["EC104ES", "EDC", "Electronic Devices Circuits", "Ms. Ch. Sarita", "3", "4"],
+    ["EN105HS", "ESE", "English for Skill Enhancement", "Ms. K. S. Rajashri", "3", "3"],
+    ["CS103ES", "PPS", "Programming for Problem Solving", "Mrs. P. Swaroopa", "3", "6"],
+    ["CH106BS", "EC Lab", "Engineering Chemistry Lab", "Mr. M. B. Mallesham / Mrs. K. Swarnalatha / Dr. K. Srilatha", "1", "2"],
+    ["CS107ES", "PPS Lab", "Programming for Problem Solving Lab", "Mrs. P. Swaroopa / Mrs. Ch. Srivalsa Alivelu Mangatayi / Mrs. M. Rajitha", "1", "3"],
+    ["FN108HS", "EWS", "Engineering Workshop", "Dr. M. Srinivasa Rao / Mr. Kommu Anil", "1", "2"],
+    ["ME109ES", "ELCS Lab", "English Language and Communication Skills Lab", "Ms. K. S. Rajashri", "1", "2"],
+    ["", "APT", "Aptitude", "Mr. T. Naga Srinu", "", "2"],
+    ["", "Project", "Project: Programming for Problem Solving", "Mrs. P. Swaroopa", "", "2"],
+    ["", "IP", "Induction Program", "", "", "0"],
+    ["", "LIB", "Library", "", "", "1"],
+    ["", "YS", "Yoga / Sports", "", "", "1"]
+  ];
+
+  var calendar = [
+    ["Induction Program", "01.08.2026", "08.08.2026", "1 Week"],
+    ["First Spell of Instructions", "11.08.2026", "03.10.2026", "8 Weeks"],
+    ["First Mid Term Examination", "05.10.2026", "10.10.2026", "1 Week"],
+    ["Second Spell of Instructions", "12.10.2026", "05.12.2026", "8 Weeks"],
+    ["Dussehra Recess", "19.10.2026", "24.10.2026", "1 Week"],
+    ["Second Mid Term Examination", "07.12.2026", "11.12.2026", "1 Week"],
+    ["Preparation Holidays & Practical Examinations", "14.12.2026", "19.12.2026", "1 Week"],
+    ["End Semester Examinations", "21.12.2026", "01.01.2027", "2 Weeks"],
+    ["Semester Break", "02.01.2027", "05.01.2027", ""]
+  ];
+
+  var dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  var todayName = dayNames[new Date().getDay()];
+
+  function cell(text) {
+    var td = document.createElement("td");
+    td.textContent = text;
+    if (/LAB|Project/.test(text)) td.className = "lab";
+    if (text === "LIB" || text === "YS") td.className = "free";
+    return td;
+  }
+
+  var ttBody = document.getElementById("ttBody");
+  timetable.forEach(function (row) {
+    var tr = document.createElement("tr");
+    var th = document.createElement("th");
+    th.textContent = row.day;
+    if (row.day === todayName) th.className = "today";
+    tr.appendChild(th);
+
+    for (var i = 0; i < 6; i++) {
+      if (i === 3 && ttBody.children.length === 0) {
+        var l = document.createElement("td");
+        l.className = "lunch";
+        l.rowSpan = timetable.length;
+        l.textContent = "LUNCH BREAK";
+        l.style.writingMode = "vertical-rl";
+        l.style.textAlign = "center";
+        tr.appendChild(l);
+      }
+      var c = cell(row.p[i]);
+      if (row.day === todayName) c.classList.add("today");
+      tr.appendChild(c);
+    }
+    ttBody.appendChild(tr);
+  });
+
+  function fillTable(id, rows, withNumber) {
+    var body = document.getElementById(id);
+    rows.forEach(function (r, idx) {
+      var tr = document.createElement("tr");
+      var n = document.createElement("td");
+      n.textContent = idx + 1;
+      tr.appendChild(n);
+      r.forEach(function (v) {
+        var td = document.createElement("td");
+        td.textContent = v;
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+  }
+
+  fillTable("subBody", subjects);
+  fillTable("calBody", calendar);
+</script>
+</body>
+</html>

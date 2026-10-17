@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f3f6fb;
+            color: #1e293b;
+        }
+
+        header {
+            background: #12345a;
+            color: white;
+            padding: 25px;
+            border-radius: 0 0 18px 18px;
+        }
+
+        .school-name {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        header p {
+            margin-top: 6px;
+            color: #d5e6f8;
+        }
+
+        .welcome {
+            margin-top: 30px;
+            font-size: 27px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 25px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            margin-bottom: 18px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px #0000000d;
+            border-left: 5px solid #2878d0;
+        }
+
+        .card h3 {
+            font-size: 16px;
+            color: #64748b;
+        }
+
+        .card h2 {
+            font-size: 30px;
+            margin-top: 12px;
+            color: #12345a;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .action {
+            background: white;
+            padding: 22px 12px;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #12345a;
+            font-weight: bold;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .action:hover {
+            background: #e8f2ff;
+            transform: translateY(-3px);
+        }
+
+        .notice {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            margin-top: 25px;
+            line-height: 1.8;
+        }
+
+        .logout {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 22px;
+            background: #e5484d;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+        }
+
+        @media (min-width: 650px) {
+            .cards {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .actions {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="school-name">🎓 ACE ENGINEERING COLLEGE</div>
+        <p>COLLEGE MANAGEMENT SYSTEM</p>
+
+        <div class="welcome">
+            Welcome, <span id="studentName">Ashrith</span>! 👋
+        </div>
+
+        <p>Student Dashboard | Academic Year 2026-27</p>
+    </header>
+
+    <main class="container">
+
+        <h2 class="section-title">My Overview</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>📅 Attendance</h3>
+                <h2>92%</h2>
+            </div>
+
+            <div class="card">
+                <h3>📚 Subjects</h3>
+                <h2>6</h2>
+            </div>
+
+            <div class="card">
+                <h3>📝 Assignments</h3>
+                <h2>3</h2>
+            </div>
+
+            <div class="card">
+                <h3>🏆 Exam Score</h3>
+                <h2>85%</h2>
+            </div>
+
+        </div>
+
+        <h2 class="section-title" style="margin-top:30px;">
+            Quick Actions
+        </h2>
+
+        <div class="actions">
+            <a href="profile.html" class="action">
+                👤<br><br>My Profile
+            </a>
+
+            <a href="attendance.html" class="action">
+                📅<br><br>Attendance
+            </a>
+            <a href="table.html" class="action">
+                📖<br><br>Timetable
+            </a>
+
+            <a href="results.html" class="action">
+                📝<br><br>Results
+            </a>
+        </div>
+
+        <div class="notice">
+            <h3>🔔 Latest Notice</h3>
+            <p>Unit test timetable will be announced soon.</p>
+            <p>Check this section for school updates.</p>
+        </div>
+
+        <a href="login.html" class="logout">Logout</a>
+
+    </main>
+
+    <footer>
+        © 2026 ace Engineering college | college Management System
+    </footer>
+
+</body>
+</html>

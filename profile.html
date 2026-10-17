@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #e0e7ff;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px #00000010;
+        }
+
+        .profile-top {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 25px;
+        }
+
+        .profile-photo {
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #dbeafe;
+        }
+
+        .profile-info h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #15803d;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .section-title {
+            font-size: 19px;
+            margin-bottom: 18px;
+            color: #1d4ed8;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .detail {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .detail label {
+            display: block;
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .detail p {
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .edit-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .back-btn {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        .edit-form {
+            display: none;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .edit-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+        }
+
+        .edit-form label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .save-btn {
+            background: #16a34a;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+
+            .profile-card {
+                padding: 18px;
+            }
+
+            .profile-top {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <h1>Student Profile</h1>
+            <p>college Management System</p>
+        </div>
+
+        <div class="profile-card">
+
+            <div class="profile-top">
+                <img
+                    id="photo"
+                    class="profile-photo"
+                    src="https://photos.app.goo.gl/H8t672Chwt4StaEo8"
+                    alt="Student Profile Photo"
+                >
+
+                <div class="profile-info">
+                    <h2 id="displayName">student name</h2>
+                    <p>Student ID: <span id="displayId">26AG1A916</span></p>
+                    <p>Class: <span id="displayClass">CSE(IOT)</span></p>
+                    <span class="badge">Active Student</span>
+                </div>
+            </div>
+
+            <h3 class="section-title">Personal Details</h3>
+
+            <div class="details-grid">
+                <div class="detail">
+                    <label>Full Name</label>
+                    <p id="name">GAJULA ASHRITH</p>
+                </div>
+
+                <div class="detail">
+                    <label>Date of Birth</label>
+                    <p id="dob">23 DECEMBER 2008</p>
+                </div>
+
+                <div class="detail">
+                    <label>Gender</label>
+                    <p id="gender">MALE</p>
+                </div>
+
+                <div class="detail">
+                    <label>Email Address</label>
+                    <p id="email">ashrithg23@gmail.com</p>
+                </div>
+
+                <div class="detail">
+                    <label>Phone Number</label>
+                    <p id="phone">8309702611</p>
+                </div>
+
+                <div class="detail">
+                    <label>Class / Section</label>
+                    <p id="classSection">CSE(IOT) - A</p>
+                </div>
+            </div>
+
+            <h3 class="section-title">Parent Details</h3>
+
+            <div class="details-grid">
+                <div class="detail">
+                    <label>Father's Name</label>
+                    <p id="father">GAJULA VENKATESH</p>
+                </div>
+
+                <div class="detail">
+                    <label>Mother's Name</label>
+                    <p id="mother">GAJULA VANAJA</p>
+                </div>
+
+                <div class="detail">
+                    <label>Address</label>
+                    <p id="address">H.NO:-8-4,SUBHASH NAGAR,SIRCILLA,RAJANNA SIRCILLA,TELANGANA</p>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn edit-btn" onclick="toggleEdit()">
+                    Edit Profile
+                </button>
+
+                <a href="dash.html" class="btn back-btn">
+                    Back to Dashboard
+                </a>
+            </div>
+
+            <div class="edit-form" id="editForm">
+                <h3 class="section-title">Edit Your Details</h3>
+
+                <form onsubmit="saveProfile(event)">
+                    <label>Full Name</label>
+                    <input id="inputName" required>
+
+                    <label>Student ID</label>
+                    <input id="inputId" required>
+
+                    <label>Date of Birth</label>
+                    <input id="inputDob" placeholder="e.g. 01 January 2008">
+
+                    <label>Gender</label>
+                    <input id="inputGender">
+
+                    <label>Email</label>
+                    <input id="inputEmail" type="email">
+
+                    <label>Phone Number</label>
+                    <input id="inputPhone" type="tel">
+
+                    <label>Class / Section</label>
+                    <input id="inputClass">
+
+                    <label>Father's Name</label>
+                    <input id="inputFather">
+
+                    <label>Mother's Name</label>
+                    <input id="inputMother">
+
+                    <label>Address</label>
+                    <input id="inputAddress">
+
+                    <label>Profile Photo</label>
+                    <input id="inputPhoto" type="file" accept="image/*"
+                           onchange="previewPhoto(event)">
+
+                    <button class="btn save-btn" type="submit">
+                        Save Changes
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleEdit() {
+            const form = document.getElementById("editForm");
+            const isHidden = getComputedStyle(form).display === "none";
+
+            if (isHidden) {
+                document.getElementById("inputName").value =
+                    document.getElementById("name").textContent;
+
+                document.getElementById("inputId").value =
+                    document.getElementById("displayId").textContent;
+
+                document.getElementById("inputDob").value =
+                    document.getElementById("dob").textContent;
+
+                document.getElementById("inputGender").value =
+                    document.getElementById("gender").textContent;
+
+                document.getElementById("inputEmail").value =
+                    document.getElementById("email").textContent;
+
+                document.getElementById("inputPhone").value =
+                    document.getElementById("phone").textContent;
+
+                document.getElementById("inputClass").value =
+                    document.getElementById("classSection").textContent;
+
+                document.getElementById("inputFather").value =
+                    document.getElementById("father").textContent;
+
+                document.getElementById("inputMother").value =
+                    document.getElementById("mother").textContent;
+
+                document.getElementById("inputAddress").value =
+                    document.getElementById("address").textContent;
+
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        }
+
+        function saveProfile(event) {
+            event.preventDefault();
+
+            const fields = {
+                name: "inputName",
+                dob: "inputDob",
+                gender: "inputGender",
+                email: "inputEmail",
+                phone: "inputPhone",
+                classSection: "inputClass",
+                father: "inputFather",
+                mother: "inputMother",
+                address: "inputAddress"
+            };
+
+            for (const [displayId, inputId] of Object.entries(fields)) {
+                document.getElementById(displayId).textContent =
+                    document.getElementById(inputId).value.trim() ||
+                    "Not provided";
+            }
+
+            const studentId =
+                document.getElementById("inputId").value.trim();
+
+            document.getElementById("displayId").textContent = studentId;
+            document.getElementById("displayName").textContent =
+                document.getElementById("inputName").value.trim();
+
+            document.getElementById("displayClass").textContent =
+                document.getElementById("inputClass").value.trim();
+
+            document.getElementById("editForm").style.display = "none";
+
+            alert("Profile updated successfully!");
+        }
+
+        function previewPhoto(event) {
+            const file = event.target.files[0];
+
+            if (file && file.type.startsWith("image/")) {
+                document.getElementById("photo").src =
+                    URL.createObjectURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
